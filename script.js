@@ -20,28 +20,35 @@ function playRound(){
 
     if(computerChoice === playerChoice){
         alert("draw");
+        return 1
     }else if(computerChoice == 'rock'){
         if(playerChoice == 'paper'){
             alert('player wins');
+            return 2
             // playerWins = True;
         }else{
             alert('player loses');
+            return 3
             // computerWins = True;
         }
     }else if(computerChoice == 'paper'){
         if(playerChoice == 'scissors'){
             alert('player wins');
+            return 2
             // playerWins = True;
         }else{
             alert('player loses');
+            return 3
             // computerWins = True;
         }
     }else{
         if(playerChoice == 'rock'){
             alert('player wins');
+            return 2
             // playerWins = True;
         }else{
             alert('player loses');
+            return 3
             // computerWins = True;
         }
     }
@@ -49,21 +56,26 @@ function playRound(){
 
 }
 
-// function playGame(){
-//     var computer = 0
-//     var player = 0
-//     for(i=1; i<=5; i++){
-//         playRound()
-//         if(computerWins == True){
-//             computer++;
-//             alert(computer)
-//         }else if(playerWins == True){
-//             player ++;
-//         }else{
-//             i--;
-//         }
-//     }
+function playGame(){
+    var computer = 0
+    var player = 0
 
-// }
+    for(i=1; i<=5; i++){
+        round = playRound()
+        if(round == 1){
+            i--;
+        }else if(round == 2){
+            player++;
+        }else{
+            computer++;
+        }
+    }
+    if(computer > player){
+        alert("computer wins")
+    }else{
+        alert("player wins")
+    }
 
-playRound();
+}
+
+playGame();
