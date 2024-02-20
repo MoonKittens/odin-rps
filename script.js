@@ -4,71 +4,75 @@ function getComputerChoice(){
     return arr[rndnum]
 }
 
-function getPlayerChoice(){
-    var choice = prompt("choose rock, paper or scissors");
-    var filteredChoice = choice.toLowerCase();
-    return filteredChoice
-}
+// function getPlayerChoice(){
+//     buttons = document.querySelectorAll('button')
 
-function playRound(){
-    var computerChoice = getComputerChoice();
-    alert(computerChoice);
-    var playerChoice = getPlayerChoice();
+//     buttons.forEach((button) => {
+//         button.addEventListener('click', ()=>{
+//             console.log(button.id)
+//             return button.id
+//         })
+//     })
+// }
 
-    // computerWins = False;
-    // playerWins = False;
+function playRound(playerChoice, computerChoice){
+    const container = document.querySelector(".container")
+    const result = document.createElement('div');
+    container.appendChild(result)
 
     if(computerChoice === playerChoice){
-        alert("draw");
+        result.textContent = "draw";
         return 1
     }else if(computerChoice == 'rock'){
         if(playerChoice == 'paper'){
-            alert('player wins');
+            result.textContent = "player wins";
             return 2
-            // playerWins = True;
         }else{
-            alert('player loses');
+            result.textContent = "player loses";
             return 3
-            // computerWins = True;
         }
     }else if(computerChoice == 'paper'){
         if(playerChoice == 'scissors'){
-            alert('player wins');
+            result.textContent = "player wins";
             return 2
-            // playerWins = True;
         }else{
-            alert('player loses');
+            result.textContent = "player loses";
             return 3
-            // computerWins = True;
         }
     }else{
         if(playerChoice == 'rock'){
-            alert('player wins');
+            result.textContent = "player wins";
             return 2
-            // playerWins = True;
         }else{
-            alert('player loses');
+            result.textContent = "player loses";
             return 3
-            // computerWins = True;
         }
     }
-    // return computerWins, playerWins
 
 }
 
-function playGame(){
+function playGame(playerChoice, computerChoice){
     var computer = 0
     var player = 0
 
-    for(i=1; i<=5; i++){
-        round = playRound()
-        if(round == 1){
-            i--;
-        }else if(round == 2){
-            player++;
+    for(i=1; i<=5; i++){    
+        if(player == 3){
+            alert("player wins")
+            break;
+        }else if(computer == 3){
+            alert("computer wins")
+            break;
         }else{
-            computer++;
+            var round = playRound(playerChoice, computerChoice);
+            if(round == 1){
+                i--;
+            }else if(round == 2){
+                player++;
+            }else{
+                computer++;
+            }
         }
+        
     }
     if(computer > player){
         alert("computer wins")
@@ -78,4 +82,14 @@ function playGame(){
 
 }
 
-playGame();
+
+var computerChoice = getComputerChoice();
+console.log(computerChoice);
+
+buttons = document.querySelectorAll('button')
+buttons.forEach((button) => {
+    button.addEventListener('click', ()=>{
+        var playerChoice = button.id;
+        playGame(playerChoice, computerChoice);
+    })
+})
