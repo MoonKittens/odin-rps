@@ -4,16 +4,6 @@ function getComputerChoice(){
     return arr[rndnum]
 }
 
-// function getPlayerChoice(){
-//     buttons = document.querySelectorAll('button')
-
-//     buttons.forEach((button) => {
-//         button.addEventListener('click', ()=>{
-//             console.log(button.id)
-//             return button.id
-//         })
-//     })
-// }
 
 function playRound(playerChoice, computerChoice){
     const container = document.querySelector(".container")
@@ -51,45 +41,46 @@ function playRound(playerChoice, computerChoice){
 
 }
 
-function playGame(playerChoice, computerChoice){
+function playGame(){
     var computer = 0
     var player = 0
+    var rounds = 0
 
-    for(i=1; i<=5; i++){    
-        if(player == 3){
-            alert("player wins")
-            break;
-        }else if(computer == 3){
-            alert("computer wins")
-            break;
-        }else{
-            var round = playRound(playerChoice, computerChoice);
-            if(round == 1){
-                i--;
-            }else if(round == 2){
-                player++;
+    buttons = document.querySelectorAll('button')
+    buttons.forEach((button) => {
+        button.addEventListener('click', ()=>{
+            var computerChoice = getComputerChoice();
+            var playerChoice = button.id;
+            var roundResult = playRound(playerChoice, computerChoice);
+
+            if(rounds < 3){
+                if(roundResult == 1){
+                    rounds--;
+                    console.log(rounds);
+    
+                }else if(roundResult == 2){
+                    player++;
+                    rounds++;
+                    console.log(rounds);
+                }else{
+                    computer++;
+                    rounds++;
+                    console.log(rounds);
+                }
+
             }else{
-                computer++;
+                if(player > computer){
+                    alert('player wins');
+
+                }else{
+                    alert('computer wins');
+                }
             }
-        }
-        
-    }
-    if(computer > player){
-        alert("computer wins")
-    }else{
-        alert("player wins")
-    }
+            
+        })
+    })
 
 }
 
 
-var computerChoice = getComputerChoice();
-console.log(computerChoice);
-
-buttons = document.querySelectorAll('button')
-buttons.forEach((button) => {
-    button.addEventListener('click', ()=>{
-        var playerChoice = button.id;
-        playGame(playerChoice, computerChoice);
-    })
-})
+playGame();
